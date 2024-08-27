@@ -1,10 +1,12 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Post {
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private Date moment;
     private String title;
     private String content;
@@ -62,12 +64,26 @@ public class Post {
 
     @Override
     public String toString() {
-        String allComments = "";
+        StringBuilder stringBuilder = new StringBuilder(); // serve justamente para quando se tem várias somas em conjunto dentro de uma variável String, para diminuir o peso da aplicação
+        stringBuilder.append(title + "\n");
+        stringBuilder.append(likes);
+        stringBuilder.append(" likes - ");
+        stringBuilder.append(dateFormat.format(moment) + "\n");
+        stringBuilder.append(content + "\n");
+        stringBuilder.append("Comments:\n");
 
         for (Comment comment : comments) {
-            allComments += "\n" + comment.getText();
+            stringBuilder.append(comment.getText() + "\n");
         }
 
-        return "title: " + title + "\ncontent: " + content + "\nlikes: " + likes + "\ncomments: " + allComments + "\nmoment: "+ moment;
+        return stringBuilder.toString();
+
+        /* String allComments = "";
+
+        for (Comment comment : comments) {
+            allComments += "\n" + comment.getText();    isso iria consumir muita memória por sempre somar a uma String um novo comentário
+        }
+
+        return "title: " + title + "\ncontent: " + content + "\nlikes: " + likes + "\ncomments: " + allComments + "\nmoment: "+ moment; */
     }
 }

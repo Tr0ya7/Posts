@@ -16,6 +16,12 @@ public class Main {
 
         System.out.println(post);
 
+        Post post1 = new Post(dateFormat.parse("28/07/2018 23:14:19"), "Good night guys", "See u tomorrow", 5);
+        post1.addComment(new Comment("Good night guys"));
+        post1.addComment(new Comment("May the force be with u"));
+
+        System.out.println(post1);
+
         input.close();
     }
 }
